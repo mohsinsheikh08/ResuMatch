@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node-dev --transpile-only server.ts",
     "build": "tsc",
@@ -10,7 +9,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "@cerebras/cerebras_cloud_sdk": "^1.91.0",
     "@google/genai": "^2.22.0",
