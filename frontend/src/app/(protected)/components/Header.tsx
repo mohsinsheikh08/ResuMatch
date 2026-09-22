@@ -212,7 +212,7 @@ const Header = () => {
         <button
           onClick={async () => {
             await logout();
-            navigate.replace("/");
+            navigate.replace("/login");
           }}
           className="text-white p-2 hover:text-red-500 hover:bg-red-500/50 rounded-lg transition"
           title="Logout"
@@ -244,6 +244,7 @@ const Header = () => {
           )}
         </button>
         <div
+        
           className={`fixed px-2 pt-2 right-7 scrollbar-none transition-all duration-300 overflow-y-auto z-10  top-8 h-70 w-70 bg-[#0A0D12] border border-[#2A2E37] rounded-lg  ${!isHistoryOpen ? "-translate-y-4 opacity-0 pointer-events-none" : "translate-y-0 opacity-100"} `}
         >
           <div className="flex flex-col gap-3 z-[999] pt-1">
@@ -260,7 +261,7 @@ const Header = () => {
             {filterResume?.map((report) => {
               
               return (
-                <div key={report._id} className="relative flex z-10 w-full">
+                <div onClick={() => {setIsHistoryOpen(false)}} key={report._id} className="relative flex z-10 w-full">
                   {isInputOpen ? (
                     ""
                   ) : (
