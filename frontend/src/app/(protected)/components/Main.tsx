@@ -27,8 +27,8 @@ const Main = () => {
   }, [id]);
   if (submitting) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader />
+      <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
+       <Loader />
       </div>
     );
   }
@@ -49,7 +49,9 @@ const Main = () => {
   }
   if (infoSections === 0) {
     if (!loading) {
-      return <Loader />;
+      return <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
+       <Loader />
+      </div>
     }
     return (
       <div>
@@ -104,7 +106,9 @@ const Main = () => {
 
   if (infoSections === 1) {
     if (!loading) {
-      return <Loader />;
+      return  <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
+       <Loader />
+      </div>
     }
     return (
       <div className="flex flex-col gap-5 px-3">
@@ -157,7 +161,9 @@ const Main = () => {
 
   if (infoSections === 2) {
     if (!loading) {
-      return <Loader />;
+      return  <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
+       <Loader />
+      </div>
     }
     return (
       <div className="flex flex-col gap-5 px-3">
@@ -179,7 +185,9 @@ const Main = () => {
 
   if (infoSections === 3) {
     if (!loading) {
-      return <Loader />;
+      return <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
+       <Loader />
+      </div>
     }
     return (
       <div className="flex flex-col gap-5 px-3">
@@ -229,11 +237,15 @@ const Main = () => {
   }
 
   if (!loading) {
-    return <Loader />;
+    return <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
+       <Loader />
+      </div>
   }
 
   if (submitting) {
-    return <Loader />;
+    return <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
+       <Loader />
+      </div>
   }
   if (!user) {
     return (
