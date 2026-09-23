@@ -32,7 +32,7 @@ const Main = () => {
   if (!userReportById) {
     return (
       <div className="w-full flex flex-col gap-3 justify-center items-center h-screen">
-        <h1 className="text-3xl font-semibold text-white">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
           Analyse or choose your resume!
         </h1>
         <Link href="/dashboard">
