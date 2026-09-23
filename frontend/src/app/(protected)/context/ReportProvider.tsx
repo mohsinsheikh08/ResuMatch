@@ -22,7 +22,7 @@ const ReportProvider = ({ children }: { children: ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean | null>(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [userReportById, setUserReportById] = useState<UserReport | null>(null);
-  const [infoSections, setInfoSections] = useState<number | null>(0);
+  const [infoSections, setInfoSections] = useState<number | null>(null);
   const [loading, setLoading] = useState(true)
 useEffect(() => {
   console.log(submitting)
