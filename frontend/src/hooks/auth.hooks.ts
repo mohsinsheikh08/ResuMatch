@@ -1,14 +1,11 @@
-"use client";  
+"use client";
 
 import { useContext } from "react";
 import { authContext } from "../contexts/AuthProvider";
 
 const useAuth = () => {
-    const contexts = useContext(authContext);
-    if (!contexts) {
-        throw new Error("The User is not available!");
-    }
-    return contexts;
+  const context = useContext(authContext);
+  return context;
 };
 
 export default useAuth;
