@@ -1,6 +1,5 @@
 import InterviewReportModel from "../models/InterviewReport.model";
 import InterviewReport from "../services/ai.service";
-import { PDFParse } from "pdf-parse";
 import { Response, Request } from "express";
 
 const InterviewReportCreate = async (req: Request, res: Response) => {
@@ -13,6 +12,7 @@ const InterviewReportCreate = async (req: Request, res: Response) => {
     const file = req.file;
     let resume = "";
     if (file) {
+      const { PDFParse } = await import("pdf-parse");
       const parser = new PDFParse({ data: file.buffer });
       const resumeText = await parser.getText();
       resume = resumeText.text;
