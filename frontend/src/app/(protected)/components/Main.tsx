@@ -30,6 +30,7 @@ const Main = () => {
     </div>
   }
   if (!userReportById) {
+    
     return (
       <div className="w-full flex flex-col gap-3 justify-center items-center h-screen">
         <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
@@ -45,6 +46,9 @@ const Main = () => {
     );
   }
   if (infoSections === 0) {
+      if(!loading){
+     return <Loader />
+  }
     return (
  <div>        
       <div className="flex flex-col gap-5 px-3">
@@ -97,6 +101,9 @@ const Main = () => {
   }
 
   if (infoSections === 1) {
+      if(!loading){
+     return <Loader />
+  }
     return (
       <div className="flex flex-col gap-5 px-3">
         <h1 className="text-3xl font-bold px-1 text-white">
@@ -147,6 +154,9 @@ const Main = () => {
   }
 
   if (infoSections === 2) {
+      if(!loading){
+     return <Loader />
+  }
     return (
       <div className="flex flex-col gap-5 px-3">
         <h1 className="text-3xl font-bold px-1 text-white">Skill Gaps</h1>
@@ -166,6 +176,9 @@ const Main = () => {
   }
 
   if (infoSections === 3) {
+      if(!loading){
+     return <Loader />
+  }
     return (
       <div className="flex flex-col gap-5 px-3">
         <h1 className="text-3xl font-bold px-1 text-white">Preperation Plan</h1>
