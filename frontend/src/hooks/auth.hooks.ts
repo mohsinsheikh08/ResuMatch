@@ -5,15 +5,14 @@ import { authContext } from "../contexts/AuthProvider";
 
 const useAuth = () => {
   const context = useContext(authContext);
-  
+
   if (!context) {
     return {
       user: null,
       loading: true,
+      submitting: false, 
       error: "",
       setUser: () => {},
-      setLoading: () => {},
-      setError: () => {},
       register: async () => {},
       login: async () => {},
       logout: async () => {},
