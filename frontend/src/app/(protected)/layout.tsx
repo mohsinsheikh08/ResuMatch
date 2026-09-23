@@ -8,8 +8,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const navigate = useRouter();
   const { user, loading } = useAuth();
 useEffect(() => {
-  if (loading) return;                    // ✅ pehle loading check
-  if (!user) {                            // ✅ phir user check
+  if (loading) return;                 
+  if (!user) {                 
     navigate.replace("/login");
   }
 }, [user, loading, navigate]);

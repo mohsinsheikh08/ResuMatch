@@ -308,6 +308,7 @@ const Header = () => {
                   <button
                     onClick={() => {
                       deleteReport();
+                      setIsHistoryOpen(true)
                     }}
                     className="text-white hover:text-red-500   p-2 active:text-red-500  active:bg-[#252525] hover:bg-[#252525] bg-[#161616] text-sm transition-all duration-300 ease-in-out cursor-pointer font-semibold w-full py-2 rounded-lg"
                   >

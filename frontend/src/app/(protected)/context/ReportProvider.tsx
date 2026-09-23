@@ -20,7 +20,7 @@ const ReportProvider = ({ children }: { children: ReactNode }) => {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean | null>(false);
-  const [isHistoryOpen, setIsHistoryOpen] = useState(true);
+  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [userReportById, setUserReportById] = useState<UserReport | null>(null);
   const [infoSections, setInfoSections] = useState<number | null>(0);
   const [loading, setLoading] = useState(true)
