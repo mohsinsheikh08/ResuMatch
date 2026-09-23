@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import useReport from "@/src/app/(protected)/hooks/report.hook";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown} from "lucide-react";
 
 import Loader from "./Loader";
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
-import useAuth from "@/src/hooks/auth.hooks";
 const Main = () => {
   const {
     infoSections,
@@ -14,8 +13,8 @@ const Main = () => {
     userReportById,
     UserInterviewReport,
     loading,
+
   } = useReport();
-  const { user } = useAuth();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const params = useParams();
 
@@ -25,91 +24,86 @@ const Main = () => {
       UserInterviewReport(id);
     }
   }, [id]);
-  if (submitting) {
-    return (
-      <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
-       <Loader />
-      </div>
-    );
+  if(submitting){
+   return <div className="flex items-center justify-center h-screen">
+    <Loader />
+    </div>
   }
-  if (infoSections === null) {
-    return (
-      <div className="w-full flex flex-col gap-3 justify-center items-center h-screen">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
-          Analyse or choose your resume!
-        </h1>
-        <Link href="/dashboard">
-          <button className="w-full py-2 px-8 flex transition-all duration-300 ease-in-out cursor-pointer active:text-white active:bg-[#FF7F00] hover:text-white hover:bg-[#FF7F00] text-[#FF7F00] justify-center items-center gap-3 rounded-full font-semibold   bg-white">
-            {" "}
-            <Sparkles size={20} /> Analyse Resume
-          </button>
-        </Link>
-      </div>
-    );
-  }
+  // if (userReportById === null) {
+    
+  //   return (
+  //     <div className="w-full flex flex-col gap-3 justify-center items-center h-screen">
+  //       <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
+  //         Analyse or choose your resume!
+  //       </h1>
+  //       <Link href="/dashboard">
+  //         <button className="w-full py-2 px-8 flex transition-all duration-300 ease-in-out cursor-pointer active:text-white active:bg-[#FF7F00] hover:text-white hover:bg-[#FF7F00] text-[#FF7F00] justify-center items-center gap-3 rounded-full font-semibold   bg-white">
+  //           {" "}
+  //           <Sparkles size={20} /> Analyse Resume
+  //         </button>
+  //       </Link>
+  //     </div>
+  //   );
+  // }
   if (infoSections === 0) {
-    if (!loading) {
-      return <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
-       <Loader />
-      </div>
-    }
+      if(!loading){
+     return <Loader />
+  }
     return (
-      <div>
-        <div className="flex flex-col gap-5 px-3">
-          <h1 className="text-3xl font-bold px-1 text-white">
-            Technical Questions
-          </h1>
-          {userReportById?.technicalQuestions.map((info, idx) => {
-            const isOpen = openIndex === idx;
-            return (
-              <div
-                className="px-3  text-white hover:text-[#FF7F00]  active:text-[#FF7F00j] active:bg-[#252525] hover:bg-[#252525] bg-[#161616] text-sm transition-all duration-300 ease-in-out cursor-pointer font-semibold w-full py-2 rounded-lg"
-                key={idx}
-              >
-                <div className="transition-all duration-300 ease-in-out">
+ <div>        
+      <div className="flex flex-col gap-5 px-3">
+     
+        <h1 className="text-3xl font-bold px-1 text-white">
+          Technical Questions
+        </h1>
+        {userReportById?.technicalQuestions.map((info, idx) => {
+          const isOpen = openIndex === idx;
+          return (
+            <div
+              className="px-3  text-white hover:text-[#FF7F00]  active:text-[#FF7F00j] active:bg-[#252525] hover:bg-[#252525] bg-[#161616] text-sm transition-all duration-300 ease-in-out cursor-pointer font-semibold w-full py-2 rounded-lg"
+              key={idx}
+            >
+              <div className="transition-all duration-300 ease-in-out">
+                <p
+                  onClick={() => {
+                    setOpenIndex(idx);
+                  }}
+                  className="text-xs sm:text-sm pr-7 leading-6  transition-all duration-300 ease-in-out relative justify-between"
+                >
+                  <span> Question : </span>
+                  {info.question}{" "}
+                  <ChevronDown
+                    className={`absolute duration-300 sm:top-0 transition-all ease-in-out top-2 right-0 ${isOpen ? "rotate-180" : "rotate-0"}`}
+                  />
+                </p>
+              </div>
+              {isOpen && (
+                <div className=" flex flex-col gap-3 pt-3 transition-all duration-300 ease-in-out">
                   <p
-                    onClick={() => {
-                      setOpenIndex(idx);
-                    }}
-                    className="text-xs sm:text-sm pr-7 leading-6  transition-all duration-300 ease-in-out relative justify-between"
+                    className={`${isOpen ? "" : "text-[#FF7F00]"} leading-6 text-xs sm:text-sm transition-all duration-300 ease-in-out`}
                   >
-                    <span> Question : </span>
-                    {info.question}{" "}
-                    <ChevronDown
-                      className={`absolute duration-300 sm:top-0 transition-all ease-in-out top-2 right-0 ${isOpen ? "rotate-180" : "rotate-0"}`}
-                    />
+                    <span> Intention : </span>
+                    {info.intention}
+                  </p>
+                  <p
+                    className={`${isOpen ? "" : "text-[#FF7F00]"} leading-6 text-xs sm:text-sm transition-all duration-300 ease-in-out`}
+                  >
+                    <span> Answer : </span>
+                    {info.answer}
                   </p>
                 </div>
-                {isOpen && (
-                  <div className=" flex flex-col gap-3 pt-3 transition-all duration-300 ease-in-out">
-                    <p
-                      className={`${isOpen ? "" : "text-[#FF7F00]"} leading-6 text-xs sm:text-sm transition-all duration-300 ease-in-out`}
-                    >
-                      <span> Intention : </span>
-                      {info.intention}
-                    </p>
-                    <p
-                      className={`${isOpen ? "" : "text-[#FF7F00]"} leading-6 text-xs sm:text-sm transition-all duration-300 ease-in-out`}
-                    >
-                      <span> Answer : </span>
-                      {info.answer}
-                    </p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+              )}
+            </div>
+          );
+        })}
+      </div></div>
     );
   }
 
   if (infoSections === 1) {
-    if (!loading) {
-      return  <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
-       <Loader />
-      </div>
-    }
+      if(!loading){
+     return <Loader />
+  }
     return (
       <div className="flex flex-col gap-5 px-3">
         <h1 className="text-3xl font-bold px-1 text-white">
@@ -160,11 +154,9 @@ const Main = () => {
   }
 
   if (infoSections === 2) {
-    if (!loading) {
-      return  <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
-       <Loader />
-      </div>
-    }
+      if(!loading){
+     return <Loader />
+  }
     return (
       <div className="flex flex-col gap-5 px-3">
         <h1 className="text-3xl font-bold px-1 text-white">Skill Gaps</h1>
@@ -184,11 +176,9 @@ const Main = () => {
   }
 
   if (infoSections === 3) {
-    if (!loading) {
-      return <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
-       <Loader />
-      </div>
-    }
+      if(!loading){
+     return <Loader />
+  }
     return (
       <div className="flex flex-col gap-5 px-3">
         <h1 className="text-3xl font-bold px-1 text-white">Preperation Plan</h1>
@@ -236,30 +226,14 @@ const Main = () => {
     );
   }
 
-  if (!loading) {
-    return <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
-       <Loader />
-      </div>
+  if(!loading){
+     return <Loader />
   }
 
-  if (submitting) {
-    return <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
-       <Loader />
-      </div>
+  if(submitting){
+    return <Loader />
   }
-  if (!user) {
-    return (
-      <div className="w-full flex flex-col gap-3 justify-center items-center h-screen">
-        <Link href="/dashboard">
-          <button className="w-full py-2 px-8 flex transition-all duration-300 ease-in-out cursor-pointer active:text-white active:bg-[#FF7F00] hover:text-white hover:bg-[#FF7F00] text-[#FF7F00] justify-center items-center gap-3 rounded-full font-semibold   bg-white">
-            {" "}
-            Login
-          </button>
-        </Link>
-      </div>
-    );
-  }
-  return null;
+  return null
 };
 
 export default Main;
