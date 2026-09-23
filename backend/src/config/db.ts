@@ -1,18 +1,26 @@
 import mongoose from "mongoose";
 
-const connectDB = async () => {
-  await mongoose
-    .connect(process.env.MOGNODB!, {
+const connectDB = async (): Promise<void> => {
+  const uri = process.env.MOGNODB;
+  if (!uri) {
+    throw new Error("MOGNODB_URI environment variable is not set");
+  }
+
+  if (mongoose.connection.readyState === 1) {
+    return;
+  }
+
+  try {
+    await mongoose.connect(uri, {
       maxPoolSize: 1,
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 10000,
       socketTimeoutMS: 45000,
-    })
-    .then((res) => {
-      console.log("Mongodb connected successfully!");
-    })
-    .catch((err) => {
-      console.log(err);
     });
+    console.log("MongoDB connected successfully!");
+  } catch (err) {
+    console.error("MongoDB connection failed:", err);
+    throw err;
+  }
 };
 
-export default connectDB;
+export default connectDB; 

@@ -4,6 +4,13 @@ import jwt from "jsonwebtoken";
 import userModel from "../models/auth.model";
 import blackListModel from "../models/blacklist.model";
 
+const isProd = process.env.NODE_ENV === "production";
+
+const cookieOptions = {
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? ("none" as const) : ("lax" as const),
+};
 
 const registerController = async (req: Request, res: Response) => {
   try {
@@ -26,16 +33,12 @@ const registerController = async (req: Request, res: Response) => {
       password: hashedPassword,
     });
 
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "7d" }
-    );
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, {
+      expiresIn: "7d",
+    });
 
     res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -60,7 +63,9 @@ const loginController = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required!" });
+      return res
+        .status(400)
+        .json({ message: "Email and password are required!" });
     }
 
     const user = await userModel.findOne({ email });
@@ -73,16 +78,12 @@ const loginController = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Invalid email or password!" });
     }
 
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "7d" }
-    );
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET as string, {
+      expiresIn: "7d",
+    });
 
     res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      ...cookieOptions,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -108,7 +109,7 @@ const logoutController = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "Invalid credentials!" });
     }
 
-    res.clearCookie("token");
+    res.clearCookie("token", cookieOptions);
 
     await blackListModel.create({ token });
 
@@ -120,7 +121,6 @@ const logoutController = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 const getUserController = async (req: Request, res: Response) => {
   try {
@@ -143,4 +143,9 @@ const getUserController = async (req: Request, res: Response) => {
   }
 };
 
-export { registerController, loginController, logoutController, getUserController };
+export {
+  registerController,
+  loginController,
+  logoutController,
+  getUserController,
+};
