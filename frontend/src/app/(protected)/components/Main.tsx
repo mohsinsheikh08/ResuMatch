@@ -29,22 +29,22 @@ const Main = () => {
     <Loader />
     </div>
   }
-  if (!userReportById) {
+  // if (userReportById === null) {
     
-    return (
-      <div className="w-full flex flex-col gap-3 justify-center items-center h-screen">
-        <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
-          Analyse or choose your resume!
-        </h1>
-        <Link href="/dashboard">
-          <button className="w-full py-2 px-8 flex transition-all duration-300 ease-in-out cursor-pointer active:text-white active:bg-[#FF7F00] hover:text-white hover:bg-[#FF7F00] text-[#FF7F00] justify-center items-center gap-3 rounded-full font-semibold   bg-white">
-            {" "}
-            <Sparkles size={20} /> Analyse Resume
-          </button>
-        </Link>
-      </div>
-    );
-  }
+  //   return (
+  //     <div className="w-full flex flex-col gap-3 justify-center items-center h-screen">
+  //       <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
+  //         Analyse or choose your resume!
+  //       </h1>
+  //       <Link href="/dashboard">
+  //         <button className="w-full py-2 px-8 flex transition-all duration-300 ease-in-out cursor-pointer active:text-white active:bg-[#FF7F00] hover:text-white hover:bg-[#FF7F00] text-[#FF7F00] justify-center items-center gap-3 rounded-full font-semibold   bg-white">
+  //           {" "}
+  //           <Sparkles size={20} /> Analyse Resume
+  //         </button>
+  //       </Link>
+  //     </div>
+  //   );
+  // }
   if (infoSections === 0) {
       if(!loading){
      return <Loader />
@@ -230,6 +230,9 @@ const Main = () => {
      return <Loader />
   }
 
+  if(submitting){
+    return <Loader />
+  }
   return null
 };
 
