@@ -261,7 +261,7 @@ const Header = () => {
             {filterResume?.map((report) => {
               
               return (
-                <div onClick={() => {setIsHistoryOpen(false)}} key={report._id} className="relative flex z-10 w-full">
+                <div key={report._id} className="relative flex z-10 w-full">
                   {isInputOpen ? (
                     ""
                   ) : (
