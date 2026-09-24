@@ -10,13 +10,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const navigate = useRouter();
   const { user, loading } = useAuth();
 
-  useEffect(() => {
-    if (loading) return;
-    if (!user) {
-      navigate.replace("/login");
-    }
-  }, [user, loading, navigate]);
-
+useEffect(() => {
+  if (loading) return;
+  if (!user) {
+    navigate.replace("/login");
+  }
+}, [user, loading, navigate]);
   if (loading) {
     return (
       <div className="bg-[#1c1c1c] w-full min-h-screen flex items-center justify-center">
