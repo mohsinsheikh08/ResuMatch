@@ -4,8 +4,6 @@ import useReport from "@/src/app/(protected)/hooks/report.hook";
 import { ChevronDown} from "lucide-react";
 
 import Loader from "./Loader";
-import Link from "next/link";
-import { Sparkles } from "lucide-react";
 const Main = () => {
   const {
     infoSections,
@@ -47,7 +45,9 @@ const Main = () => {
   // }
   if (infoSections === 0) {
       if(!loading){
-     return <Loader />
+     return  <div className="flex items-center justify-center h-screen">
+    <Loader />
+    </div>
   }
     return (
  <div>        
@@ -102,7 +102,9 @@ const Main = () => {
 
   if (infoSections === 1) {
       if(!loading){
-     return <Loader />
+     return  <div className="flex items-center justify-center h-screen">
+    <Loader />
+    </div>
   }
     return (
       <div className="flex flex-col gap-5 px-3">
@@ -155,7 +157,9 @@ const Main = () => {
 
   if (infoSections === 2) {
       if(!loading){
-     return <Loader />
+     return  <div className="flex items-center justify-center h-screen">
+    <Loader />
+    </div>
   }
     return (
       <div className="flex flex-col gap-5 px-3">
@@ -177,7 +181,9 @@ const Main = () => {
 
   if (infoSections === 3) {
       if(!loading){
-     return <Loader />
+     return  <div className="flex items-center justify-center h-screen">
+    <Loader />
+    </div>
   }
     return (
       <div className="flex flex-col gap-5 px-3">
@@ -227,11 +233,15 @@ const Main = () => {
   }
 
   if(!loading){
-     return <Loader />
+     return  <div className="flex items-center justify-center h-screen">
+    <Loader />
+    </div>
   }
 
   if(submitting){
-    return <Loader />
+    return <div className="flex items-center justify-center h-screen">
+    <Loader />
+    </div>
   }
   return null
 };

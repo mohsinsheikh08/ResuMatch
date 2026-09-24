@@ -51,7 +51,7 @@ export interface ReportStructure {
   submitting: boolean;
   allReports: ReportListItem[] | null;
   setAllReports: React.Dispatch<React.SetStateAction<ReportListItem[] | null>>;
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean | null>>;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   isSidebarOpen: boolean | null;
   isHistoryOpen: boolean;
   setIsHistoryOpen: React.Dispatch<React.SetStateAction<boolean>>;

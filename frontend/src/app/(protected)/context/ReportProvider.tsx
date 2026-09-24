@@ -19,7 +19,7 @@ const ReportProvider = ({ children }: { children: ReactNode }) => {
   const [allReports, setAllReports] = useState<ReportListItem[] | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean | null>(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [userReportById, setUserReportById] = useState<UserReport | null>(null);
   const [infoSections, setInfoSections] = useState<number | null>(0);

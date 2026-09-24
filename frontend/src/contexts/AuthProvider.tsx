@@ -1,14 +1,14 @@
 "use client";
 
-import React, { createContext, ReactNode, useState, } from "react";
+import React, { createContext, ReactNode, useEffect, useState } from "react";
 import { User, Register, Login } from "../types/auth.types";
 import authService from "../services/auth.service";
 import axios from "axios";
 
 interface AuthStructure {
   user: User | null;
-  loading: boolean;          
-  submitting: boolean;         
+  loading: boolean;
+  submitting: boolean;
   error: string;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   register: (data: Register) => Promise<void>;
@@ -25,14 +25,12 @@ interface AuthProviderProps {
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);      
-  const [submitting, setSubmitting] = useState<boolean>(false); 
+  const [loading, setLoading] = useState<boolean>(true);
+  const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-
-
   const register = async (data: Register) => {
-    setSubmitting(true);   
+    setSubmitting(true);
     setError("");
     try {
       const result = await authService.register(data);
@@ -49,7 +47,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const login = async (data: Login) => {
-    setSubmitting(true);     
+    setSubmitting(true);
     setError("");
     try {
       const result = await authService.login(data);
@@ -61,7 +59,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       setError("Login failed!");
       throw err;
     } finally {
-      setSubmitting(false);   
+      setSubmitting(false);
     }
   };
 
@@ -82,7 +80,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const fetchUser = async () => {
-    setLoading(true);        
+    setLoading(true);
     setError("");
     try {
       const result = await authService.getUser();
@@ -93,9 +91,15 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       setUser(null);
     } finally {
-      setLoading(false);      
+      setLoading(false);
     }
   };
+
+  // ✅ Final version
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   const value: AuthStructure = {
     user,
     loading,

@@ -1,4 +1,3 @@
-import axios from "axios";
 import api from "../lib/api";
 import {Register, Login, Logout, AuthResponse} from '@/src/types/auth.types'
 
