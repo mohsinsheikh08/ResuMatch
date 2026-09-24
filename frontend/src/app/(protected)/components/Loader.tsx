@@ -14,7 +14,6 @@ const Loader = ({ size = 40 }: LoaderProps) => {
         borderRightColor: "#FF7F00",
       }}
     />
-    <p className="text-white text-xl font-semibold">Report is generating!</p>
     </div>
   );
 };

@@ -95,7 +95,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  // ✅ Final version
+
   useEffect(() => {
     fetchUser();
   }, []);
