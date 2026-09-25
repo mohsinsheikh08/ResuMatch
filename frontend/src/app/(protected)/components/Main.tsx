@@ -12,6 +12,7 @@ const Main = () => {
     UserInterviewReport,
     loading,
     setIsHistoryOpen,
+    isHistoryOpen,
   } = useReport();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const params = useParams();
@@ -31,31 +32,23 @@ const Main = () => {
   }
 
   if (infoSections === 0) {
-    if (userReportById?.technicalQuestions === null) {
+    if (userReportById === null) {
+      console.log(userReportById)
       return (
-        <div className="flex flex-col items-center justify-center h-screen gap-4 px-4">
-          {/* Icon */}
-          <div className="w-20 h-20 rounded-full bg-[#FF7F00]/10 flex items-center justify-center">
-            <Sparkles size={40} className="text-[#FF7F00]" />
-          </div>
-
-          
-          <h2 className="text-white text-2xl font-bold text-center">
-            No Resume Selected
-          </h2>
-
-          
-          <p className="text-gray-400 text-sm text-center max-w-md">
-            Select a resume from the history to see technical questions
-          </p>
-
-        
+        <div className="w-full h-screen flex flex-col gap-4 justify-center items-center ">
+          <p className=" text-2xl text-white font-semibold">You want to select resume!</p>
           <button
-            onClick={() => setIsHistoryOpen(true)}
-            className="mt-2 px-6 py-3 bg-[#FF7F00] hover:bg-[#FF9533] text-white font-semibold rounded-full transition-all duration-300 cursor-pointer"
-          >
-            View History
-          </button>
+          onClick={(e) => {
+            e.stopPropagation()
+            setIsHistoryOpen((prev: boolean) => {
+              console.log("isHistoryOpen changing from", prev, "to", true);
+              return true;
+            });
+          }}
+          className=" py-2 w-60 flex transition-all duration-300 ease-in-out cursor-pointer active:text-white active:bg-[#FF7F00] hover:text-white hover:bg-[#FF7F00] text-[#FF7F00] justify-center items-center gap-3 rounded-full font-semibold   bg-white"
+        >
+          History
+        </button>
         </div>
       );
     }
@@ -118,34 +111,6 @@ const Main = () => {
   }
 
   if (infoSections === 1) {
-    if (userReportById?.technicalQuestions === null) {
-      return (
-        <div className="flex flex-col items-center justify-center h-screen gap-4 px-4">
-          {/* Icon */}
-          <div className="w-20 h-20 rounded-full bg-[#FF7F00]/10 flex items-center justify-center">
-            <Sparkles size={40} className="text-[#FF7F00]" />
-          </div>
-
-          
-          <h2 className="text-white text-2xl font-bold text-center">
-            No Resume Selected
-          </h2>
-
-          
-          <p className="text-gray-400 text-sm text-center max-w-md">
-            Select a resume from the history to see technical questions
-          </p>
-
-        
-          <button
-            onClick={() => setIsHistoryOpen(true)}
-            className="mt-2 px-6 py-3 bg-[#FF7F00] hover:bg-[#FF9533] text-white font-semibold rounded-full transition-all duration-300 cursor-pointer"
-          >
-            View History
-          </button>
-        </div>
-      );
-    }
     if (!loading) {
       return (
         <div className="flex items-center justify-center h-screen">
@@ -203,34 +168,6 @@ const Main = () => {
   }
 
   if (infoSections === 2) {
-    if (userReportById?.technicalQuestions === null) {
-      return (
-        <div className="flex flex-col items-center justify-center h-screen gap-4 px-4">
-    
-          <div className="w-20 h-20 rounded-full bg-[#FF7F00]/10 flex items-center justify-center">
-            <Sparkles size={40} className="text-[#FF7F00]" />
-          </div>
-
-          
-          <h2 className="text-white text-2xl font-bold text-center">
-            No Resume Selected
-          </h2>
-
-          
-          <p className="text-gray-400 text-sm text-center max-w-md">
-            Select a resume from the history to see technical questions
-          </p>
-
-        
-          <button
-            onClick={() => setIsHistoryOpen(true)}
-            className="mt-2 px-6 py-3 bg-[#FF7F00] hover:bg-[#FF9533] text-white font-semibold rounded-full transition-all duration-300 cursor-pointer"
-          >
-            View History
-          </button>
-        </div>
-      );
-    }
     if (!loading) {
       return (
         <div className="flex items-center justify-center h-screen">
@@ -257,34 +194,6 @@ const Main = () => {
   }
 
   if (infoSections === 3) {
-    if (userReportById?.technicalQuestions === null) {
-      return (
-        <div className="flex flex-col items-center justify-center h-screen gap-4 px-4">
-    
-          <div className="w-20 h-20 rounded-full bg-[#FF7F00]/10 flex items-center justify-center">
-            <Sparkles size={40} className="text-[#FF7F00]" />
-          </div>
-
-          
-          <h2 className="text-white text-2xl font-bold text-center">
-            No Resume Selected
-          </h2>
-
-          {/* Subtext */}
-          <p className="text-gray-400 text-sm text-center max-w-md">
-            Select a resume from the history to see technical questions
-          </p>
-
-        
-          <button
-            onClick={() => setIsHistoryOpen(true)}
-            className="mt-2 px-6 py-3 bg-[#FF7F00] hover:bg-[#FF9533] text-white font-semibold rounded-full transition-all duration-300 cursor-pointer"
-          >
-            View History
-          </button>
-        </div>
-      );
-    }
     if (!loading) {
       return (
         <div className="flex items-center justify-center h-screen">

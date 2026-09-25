@@ -24,9 +24,10 @@ const ReportProvider = ({ children }: { children: ReactNode }) => {
   const [userReportById, setUserReportById] = useState<UserReport | null>(null);
   const [infoSections, setInfoSections] = useState<number | null>(0);
   const [loading, setLoading] = useState(true)
-useEffect(() => {
-  console.log(submitting)
-}, [submitting])
+ useEffect(() => {
+ console.log("Report Provider " + isHistoryOpen)
+ }, [isHistoryOpen])
+ 
 
   const ReportGenerator = async (data: UserData) => {
     setError(undefined);

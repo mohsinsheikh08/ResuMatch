@@ -36,7 +36,6 @@ const Header = () => {
     UserInterviewReport,
     userReportById,
     setInfoSections,
-    infoSections,
     EditReport,
     DeleteReport,
   } = useReport();
@@ -66,9 +65,7 @@ const Header = () => {
     },
   ];
 
-  useEffect(() => {
-    console.log("userReportById:", userReportById);
-  }, [userReportById]);
+  console.log("Header RENDER: isHistoryOpen =", isHistoryOpen);
 
   const percentage =
     typeof userReportById?.matchScore === "number"
@@ -231,20 +228,37 @@ const Header = () => {
           className=" text-white p-2 hover:bg-[#1A1D24] active:bg-[#1A1D24] rounded-lg transition "
         >
           {!isHistoryOpen ? (
-           <div className="group inlin-block relative">
-             <RotateCcwClock className="cursor-pointer" size={25} />
+            <div className="group inlin-block relative">
+              <RotateCcwClock className="cursor-pointer" size={25} />
               <p className="text-white group-hover:opacity-100 opacity-0 absolute top-8  transition-all text-white  bg-[#161616] text-sm transition-all duration-300 ease-in-out cursor-pointer font-semibold  px-3 py-1 rounded-lg  duration-300 ease-in-out right-0">
-          History
-        </p>
-           </div>
+                History
+              </p>
+            </div>
           ) : (
-           <div>
-             <X className="cursor-pointer" size={25} />
-           </div>
+            <div>
+              <X className="cursor-pointer" size={25} />
+            </div>
           )}
         </button>
-        <div
-        
+       {allReports === null || allReports?.length === 0?  <div
+          className={`fixed justify-center items-center px-2 pt-2 right-7 scrollbar-none transition-all duration-300 overflow-y-auto z-10 h-70 top-8 sm:h-70 sm:w-70 bg-[#0A0D12] border border-[#2A2E37] rounded-lg  ${!isHistoryOpen ? "-translate-y-4 opacity-0 pointer-events-none" : "translate-y-0 opacity-100"} `}
+        >
+          <div className="h-full w-full flex justify-center items-center">
+             <Link href="/dashboard">
+              <button
+                onClick={() => {
+                  setIsSidebarOpen(false);
+                  setIsHistoryOpen(false)
+                }}
+                className="w-65 py-2 flex transition-all duration-300 ease-in-out cursor-pointer active:text-white active:bg-[#FF7F00] hover:text-white hover:bg-[#FF7F00] text-[#FF7F00] justify-center items-center gap-3 rounded-full font-semibold   bg-white"
+              >
+                <Sparkles size={20} /> Analyse Resume
+              </button>
+            </Link>
+          </div>
+          
+        </div>
+          :  <div
           className={`fixed px-2 pt-2 right-7 scrollbar-none transition-all duration-300 overflow-y-auto z-10 h-70 top-8 sm:h-70 sm:w-70 bg-[#0A0D12] border border-[#2A2E37] rounded-lg  ${!isHistoryOpen ? "-translate-y-4 opacity-0 pointer-events-none" : "translate-y-0 opacity-100"} `}
         >
           <div className="flex flex-col gap-3 z-[999] pt-1">
@@ -259,7 +273,6 @@ const Header = () => {
               />
             </div>
             {filterResume?.map((report) => {
-              
               return (
                 <div key={report._id} className="relative flex z-10 w-full">
                   {isInputOpen ? (
@@ -308,7 +321,7 @@ const Header = () => {
                   <button
                     onClick={() => {
                       deleteReport();
-                      setIsHistoryOpen(true)
+                      setIsHistoryOpen(true);
                     }}
                     className="text-white hover:text-red-500   p-2 active:text-red-500  active:bg-[#252525] hover:bg-[#252525] bg-[#161616] text-sm transition-all duration-300 ease-in-out cursor-pointer font-semibold w-full py-2 rounded-lg"
                   >
@@ -318,7 +331,7 @@ const Header = () => {
               </>,
               document.body,
             )}
-        </div>
+        </div>}
       </div>
     </div>
   );

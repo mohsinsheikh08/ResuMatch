@@ -8,8 +8,8 @@ import Loader from "./Loader";
 import { useRouter } from "next/navigation";
 
 const InfoPage = () => {
-  const navigate = useRouter()
-  const { submitting, ReportGenerator } = useReport();
+  const navigate = useRouter();
+  const { submitting, AllReports, ReportGenerator } = useReport();
   const [file, setFile] = useState<File | null>(null);
   const [jobDescription, setJobDescription] = useState<string>("");
   const [selfDescription, setSelfDescription] = useState("");
@@ -27,7 +27,8 @@ const InfoPage = () => {
       setFile(null);
       setJobDescription("");
       setSelfDescription("");
-      navigate.push('/')
+      await AllReports()
+      navigate.push("/");
     } catch (err) {
       if (axios.isAxiosError(err)) {
         console.log(err.response?.data);
@@ -35,8 +36,8 @@ const InfoPage = () => {
       }
     }
   };
-    if(submitting){
-     return <Loader />
+  if (submitting) {
+    return <Loader />;
   }
 
   return (
@@ -47,9 +48,7 @@ const InfoPage = () => {
       className="w-full px-5 h-full sm:flex sm:justify-center"
       action=""
     >
-      
       <div className="h-full w-full lg:w-1/3 px-2 pt-3">
-      
         <div className="w-full">
           {file ? (
             <label
