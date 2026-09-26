@@ -162,12 +162,8 @@ Format: "<Role> at <Company>". If company unknown, use role only.
     throw new Error("Gemini returned empty response");
   }
 
-  console.log("Gemini RAW:", text);
-
   const parsed = JSON.parse(text);
   const result = interviewReportSchema.parse(parsed);
-
-  console.log("Validated:", result);
   return result;
 };
 

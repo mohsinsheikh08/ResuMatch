@@ -33,7 +33,6 @@ const Main = () => {
 
   if (infoSections === 0) {
     if (userReportById === null) {
-      console.log(userReportById)
       return (
         <div className="w-full h-screen flex flex-col gap-4 justify-center items-center ">
           <p className=" text-2xl text-white font-semibold">You want to select resume!</p>

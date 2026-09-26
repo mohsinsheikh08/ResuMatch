@@ -65,8 +65,6 @@ const Header = () => {
     },
   ];
 
-  console.log("Header RENDER: isHistoryOpen =", isHistoryOpen);
-
   const percentage =
     typeof userReportById?.matchScore === "number"
       ? userReportById?.matchScore
@@ -100,7 +98,6 @@ const Header = () => {
       if (!menu?.id) {
         return;
       }
-      console.log(menu.id);
       if (!confirm("Are you sure you want to delte this report")) return;
       await DeleteReport(menu.id);
       setMenu(null);
@@ -290,7 +287,6 @@ const Header = () => {
                       <button
                         onClick={(e) => {
                           const r = e.currentTarget.getBoundingClientRect();
-                          console.log(r);
                           setMenu({
                             top: r.bottom,
                             left: r.right - 60,
