@@ -12,8 +12,9 @@ const InterviewReportCreate = async (req: Request, res: Response) => {
     const file = req.file;
     let resume = "";
     if (file) {
+      const { CanvasFactory } = await import("pdf-parse/worker");
       const { PDFParse } = await import("pdf-parse");
-      const parser = new PDFParse({ data: file.buffer });
+      const parser = new PDFParse({ data: file.buffer, CanvasFactory });
       const resumeText = await parser.getText();
       resume = resumeText.text;
     }
@@ -174,4 +175,10 @@ const deleteInterviewReport = async (req: Request, res: Response) => {
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
-export { InterviewReportCreate, GetOneInterviewReport, AllInterviewReports, deleteInterviewReport, editInterviewReport };
+export {
+  InterviewReportCreate,
+  GetOneInterviewReport,
+  AllInterviewReports,
+  deleteInterviewReport,
+  editInterviewReport,
+};
