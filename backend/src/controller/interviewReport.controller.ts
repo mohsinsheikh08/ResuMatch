@@ -12,8 +12,9 @@ const InterviewReportCreate = async (req: Request, res: Response) => {
     const file = req.file;
     let resume = "";
     if (file) {
-      const { CanvasFactory } = await import("pdf-parse/worker");
+      const { CanvasFactory,getData } = await import("pdf-parse/worker");
       const { PDFParse } = await import("pdf-parse");
+      PDFParse.setWorker(getData());
       const parser = new PDFParse({ data: file.buffer, CanvasFactory });
       const resumeText = await parser.getText();
       resume = resumeText.text;
